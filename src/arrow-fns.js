@@ -3,7 +3,9 @@
 // Ex.:
 //   giveMeTwo();
 //   => 2
-export const giveMeTwo = undefined;
+export const giveMeTwo = () => {
+  return 2;
+};
 
 // Set the value of addNums to an arrow function that takes in two numbers and
 // returns their sum.
@@ -11,7 +13,9 @@ export const giveMeTwo = undefined;
 // Ex.:
 //   addNums(1, 2);
 //   => 3
-export const addNums = undefined;
+export const addNums = (num1, num2) => {
+  return num1 + num2;
+};
 
 // Set the value of max to an arrow function that takes in two numbers and
 // returns the largest one.
@@ -19,7 +23,9 @@ export const addNums = undefined;
 // Ex.:
 //   max(1, 2);
 //   => 2
-export const max = undefined;
+export const max = (num1, num2) => {
+  return Math.max(num1, num2);
+};
 
 // Given an array of numbers, return a new array that only includes the even
 // numbers. Do this using array iteration methods. Do NOT use a for loop.
@@ -27,15 +33,20 @@ export const max = undefined;
 // Ex.:
 //   evens([1, 2, 3, 4, 5]);
 //   => [2, 4]
-export function evens(nums) {}
+export function evens(nums) {
+
+  return nums.filter(num => num % 2 === 0);
+}
 
 // Given an array of names, return a new array of greetings for each name. Do
 // this using array iteration methods. Do NOT use a for loop.
 //
 // Ex.:
-//   createGreetings(['Clive', 'Jill', 'Torgal']);
+//   createGreetings(['Clive', 'Jill', 'Torgal']);o
 //   => ['Hello, Clive!', 'Hello, Jill!', 'Hello, Torgal!']
-export function createGreetings(names) {}
+export function createGreetings(names) {
+  return names.map(name => name = `Hello, ${name}!`);
+}
 
 // Given an array of words, return a new array where each word is uppercased
 // and only includes words that are longer than 4 characters. Do this using
@@ -44,4 +55,8 @@ export function createGreetings(names) {}
 // Ex.:
 //   loudLongWords(['apple', 'pear', 'cake', 'pinata']);
 //   => ['APPLE', 'PINATA']
-export function loudLongWords(words) {}
+export function loudLongWords(words) {
+  return words
+    .filter(word => word.length > 4)
+    .map(word => word.toUpperCase());
+}
