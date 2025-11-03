@@ -11,7 +11,16 @@
 //     { firstName: 'Karlach', lastName: 'Cliffgate', location: 'Avernus' }
 //   ]);
 //   => ['Gale Dekarios', 'Wyll Ravengard', 'Karlach Cliffgate'];
-export function getNames(people) {}
+export function getNames(people) {
+  const people_names = [];
+  let name = "";
+  for (const person of people) {
+    name = `${person.firstName} ${person.lastName}`;
+    people_names.push(name);
+  }
+
+  return people_names;
+}
 
 // Given an object representing a person, return their full name (first name and last name).
 // You MUST use object destructuring in your solution.
@@ -22,7 +31,11 @@ export function getNames(people) {}
 // Ex.:
 //   getName({ firstName: 'Gale', lastName: 'Dekarios', location: 'Waterdeep' });
 //   => 'Gale Dekarios'
-export function getNameUsingDestructuring(person) {}
+export function getNameUsingDestructuring(person) {
+
+  const { firstName, lastName } = person;
+  return `${firstName} ${lastName}`;
+}
 
 // Given an array of objects representing people, return a new array of the
 // people matching the given location.
@@ -41,7 +54,10 @@ export function getNameUsingDestructuring(person) {}
 //     { firstName: 'Wyll', lastName: 'Ravengard', location: "Baldur's Gate" },
 //     { firstName: 'Astarion', lastName: 'Ancunin', location: "Baldur's Gate" }
 //   ];
-export function getPeopleByLocation(people, location) {}
+export function getPeopleByLocation(people, location) {
+  // Use .filter() to return only people whose location matches the given one
+  return people.filter(({ location: loc }) => loc === location);
+}
 
 // Return the number of occurrences of each word in a string.
 // This function doesn't handle punctuation and is case-sensitive, so you can
@@ -50,7 +66,18 @@ export function getPeopleByLocation(people, location) {}
 // Ex.:
 //   wordCount('hello world')
 //   => { hello: 1, world: 1 }
-export function wordCount(str) {}
+export function wordCount(str) {
+  const words = str.split(' '); // Split string into words by spaces
+  const count = {};
+
+  for (const word of words) {
+    // If word already exists in count, increment it; otherwise, set to 1
+    count[word] = (count[word] || 0) + 1;
+  }
+
+  return count;
+}
+
 
 // Given an object representing a bug, return true if the given bug is
 // available in the given month.
@@ -72,7 +99,11 @@ export function wordCount(str) {}
 //     }
 //   }, 1);
 //   => true
-export function isBugAvailable(bug, month) {}
+export function isBugAvailable(bug, month) {
+  const { availability: { months } } = bug;
+  return months.includes(month);
+}
+
 
 // Given an array of objects representing bugs, return an object that'll be
 // used to build a calendar. The keys of the object should be the months of the
@@ -114,5 +145,21 @@ export function isBugAvailable(bug, month) {}
 //     11: [],
 //     12: [],
 //   }
+export function buildBugHuntCalendar(bugs) {
+  const calendar = {};
 
-export function buildBugHuntCalendar(bugs) {}
+  // Initialize calendar with months 1 through 12
+  for (let month = 1; month <= 12; month++) {
+    calendar[month] = [];
+  }
+
+  // Loop through each bug
+  for (const { name, availability: { months } } of bugs) {
+    // For each month the bug is available, add its name to the calendar
+    for (const month of months) {
+      calendar[month].push(name);
+    }
+  }
+
+  return calendar;
+}
